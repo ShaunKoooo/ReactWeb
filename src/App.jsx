@@ -15,7 +15,6 @@ const App = () => {
   
 
   const atClickHamburger = (isOpen) => {
-    console.log(isOpen)
     setClickHamburger(isOpen);
   }
 

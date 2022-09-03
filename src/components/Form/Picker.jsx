@@ -1,13 +1,9 @@
 import { useEffect } from 'react';
 import { useRef, memo, useCallback, useState } from 'react';
-import RenderTip from '../../hooks/RenderTip';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import RenderTip from '../../optimizeTest/RenderTip';
 
 const Picker = ({pickerTitle, classify, setClassify}) => {
   const ref = useRef(null);
-  const [test, setTest] = useState(0);
 
   useEffect(() => {
     if (classify === '其他') ref.current.focus(); 
@@ -34,13 +30,10 @@ const Picker = ({pickerTitle, classify, setClassify}) => {
         詢問類別：
       </label>
       <div className='lg:grid lg:grid-cols-2 lg:gap-2'>
-        <div className='mb-2'>
-          <select value={classify} onChange={onPickerChange} className="grid grid-cols-2 block appearance-none w-full border py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+        <div className='w-full mb-2 flex border py-3 px-4 pr-8 rounded'>
+          <select value={classify} onChange={onPickerChange} className="w-full focus:outline-none" >
             <RenderTitle />
           </select>
-          <div className="absolute inset-y-0 right-0 flex items-center px-2">
-            
-          </div>
         </div>
         {classify === '其他' && <div>
           <input
