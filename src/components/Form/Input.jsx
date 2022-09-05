@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import RenderTip from '../../optimizeTest/RenderTip';
+import RenderTip from '@/optimizeTest/RenderTip';
 
 const Input = ({title, atOnChange}) => {
   return (

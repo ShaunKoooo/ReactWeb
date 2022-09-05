@@ -1,7 +1,7 @@
-import '../css/styles.scss';
-import Button from './Button';
+import '@/css/styles.scss';
+import Button from '@/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
 const Navbar = (props) => {
   const {onClicked, isOpen} = props;

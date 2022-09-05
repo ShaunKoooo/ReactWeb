@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRef, memo, useCallback, useState } from 'react';
-import RenderTip from '../../optimizeTest/RenderTip';
+import RenderTip from '@/optimizeTest/RenderTip';
 
 const Picker = ({pickerTitle, classify, setClassify}) => {
   const ref = useRef(null);

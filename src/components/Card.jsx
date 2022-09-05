@@ -1,5 +1,5 @@
 import {memo} from 'react';
-import Img from './Img';
+import Img from '@/components/Img';
 
 const Card = (props) => {
   const {src, width, height} = props;

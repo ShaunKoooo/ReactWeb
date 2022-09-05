@@ -1,13 +1,12 @@
-import Img from "./components/Img";
-import Navbar from "./components/NavBar";
-import Images from './Img';
-import SubContent from "./components/SubContent";
-import Card from './components/Card';
-import Form from './components/Form/Form';
-import Footer from './components/Footer';
-import { useState, useCallback } from "react";
-import HamburgerBar from "./components/HamburgerBar";
-import { useMemo } from "react";
+import Img from "@/components/Img";
+import Navbar from "@/components/NavBar";
+import Images from '@/Img';
+import SubContent from "@/components/SubContent";
+import Card from '@/components/Card';
+import Form from '@/components/Form/Form';
+import Footer from '@/components/Footer';
+import HamburgerBar from "@/components/HamburgerBar";
+import { useState, useMemo } from "react";
 
 const App = () => {
   const width = window.innerWidth;

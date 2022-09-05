@@ -1,9 +1,9 @@
 import { useState, useCallback, useMemo, memo } from "react";
-import '../../css/styles.scss';
+import '@/css/styles.scss';
 
-import Picker from './Picker';
-import Input from './Input';
-import Button from '../Button';
+import Picker from '@/components/Form/Picker';
+import Input from '@/components/Form/Input';
+import Button from '@/components/Button';
 const pickerTitle = ['請選擇', '平台操作', '開發建議', '異業合作', '其他'];
 
 const Form = (props) => {

@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# AsianSquat 更新網站
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- # React
+# Tailwind css -->
 
-## Available Scripts
+# webpack setting (webpack.config.js)
+  ### 1. mode: 'development' | 'production'
+  ```js
+  // 告訴 webpack 是用哪種環境設定
+  mode:"development",
+  ```
+  **開發模式產出的檔案會有較多細節，檔案較大。上線模式則會優化成最短程式碼。**  
+     
+  packege.json 的 'script' 裡 webpack 指令  
+  ```json
+  // 開發版指令
+  "dev": "webpack --mode development"
+  ```  
+  ```json
+  // 上線版指令
+  "deploy": "webapck --mode production"
+  ``` 
 
-In the project directory, you can run:
+  ___
 
-### `npm start`
+  ### 2. entry 
+  ```js
+  // 程式進入點
+  entry: [
+    './public/index.html',
+    ...
+  ]
+  ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+___
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  ### 3. output 
+  ```js
+  // 輸出後檔案名稱及檔案放置點
+  output:{
+    filename: 'bundle.js',
+    path: path.resolve('pack', './'),
+  },
+  ```
+___
 
-### `npm test`
+  ### 4. module: {rules: []}
+  **1. 編譯規則**
+  ```js
+  module: {
+    rules: [
+      // 編譯 css|scss|tailwindcss
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader']
+      },
+      // 編譯圖片
+      {
+        test: /\.(png|jpg|JPG)$/,
+        type: 'asset/resource'
+      },
+      // 編譯 jsx + 編譯 ES6
+      {
+        test: /\.(jsx|js)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: { presets: [['@babel/preset-react', {"runtime": "automatic"}], '@babel/preset-env'] }
+        } 
+      },
+      // 編譯 html 
+      {
+        test: /\.html$/,
+        loader: "html-loader",
+      },
+    ]
+  },
+  ```  
+  ___
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  ### 5. devServer
+  ```js
+  // 增加 devServer 試跑程式碼
+  devServer: {
+    port: 3000,
+  }
+  ```  
+___
 
-### `npm run build`
+  ### 6. resolve
+  一般情況未設置時，webpack 解析檔案必須要含有副檔名才行。
+  ```js
+  resolve: {
+    // resolve.alias 為專案設置絕對路徑
+    alias: {
+      '@': path.resolve('src'),
+    },
+    // resolve.extensions 為檔案設置擴展，使檔案 import 時可不用加副檔名
+    extensions: ['.js', '.jsx'],
+  },
+  ```
+  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+***
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## [webpack 加入 tailwindcss](https://gist.github.com/bradtraversy/1c93938c1fe4f10d1e5b0532ae22e16a#:~:text=Webpack%20%26%20Tailwind%20CSS%20Setup)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+***
+## problems && solves
+### [devServer blank page -> 加入 plugin](https://forum.freecodecamp.org/t/anyone-used-webpack-dev-server-cant-figure-out-how-to-serve-app/149533)
 
-### `npm run eject`
+```js
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+module.exports = {
+  // ...
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './client/public/index.html'
+    })
+  ],
+  // ...
+};
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### [啟動 devServer 後，console 顯示找不到 React](https://stackoverflow.com/a/64994595)
+```js
+{
+     "presets": [
+         "@babel/preset-env",
+        ["@babel/preset-react", {"runtime": "automatic"}]
+     ]
+ }
+ ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### [webpack warning -> The 'mode' option has not been set, webpack will fallback to 'production' for this value.Set 'mode' option to 'development' or 'production' to enable defaults for each environment.You can also set it to 'none' to disable any default behavior.](https://www.webpackjs.com/concepts/mode/)
+webpack.config.js 設定 mode: 'development' / 'production'
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
